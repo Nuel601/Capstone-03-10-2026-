@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Control - Barangay 118 Online System</title>
+    <link rel="shortcut icon" type="image/png" href="Logo-Favicon-removebg-preview.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CreateAccountAdmin.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo" onclick="window.open('PanelUserView.html', '_blank')">
+                    <div class="logo-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>BARANGAY 118 ADMIN PANEL</h1>
+                        <p>User Registration Control Center</p>
+                    </div>
+                </div>
+                <div class="nav-links">
+                    <a href="PanelAdmin.html">Dashboard</a>
+                    <a href="AboutUsAdmin.html">AboutUs</a>
+                    <a href="NewsAdmin.html">News</a>
+                    <a href="EmergencyAdmin.html">Emergency</a>
+                    <a href="CreateAccountAdmin.html" class="active">Create</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-panel">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title"><i class="fas fa-cogs"></i> Control Center</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" data-tab="dashboard"><span class="sidebar-icon"><i class="fas fa-tachometer-alt"></i></span> Dashboard</a></li>
+                <li><a href="#" data-tab="user-management"><span class="sidebar-icon"><i class="fas fa-users-cog"></i></span> User Management</a></li>
+                <li><a href="#" data-tab="pending-registrations"><span class="sidebar-icon"><i class="fas fa-hourglass-half"></i></span> Pending Registrations</a></li>
+                <li><a href="#" data-tab="approved-accounts"><span class="sidebar-icon"><i class="fas fa-check-circle"></i></span> Approved Accounts</a></li>
+                <li><a href="#" data-tab="rejected-applications"><span class="sidebar-icon"><i class="fas fa-times-circle"></i></span> Rejected Applications</a></li>
+                <li><a href="#" data-tab="all-registrations"><span class="sidebar-icon"><i class="fas fa-list-alt"></i></span> All Registrations</a></li>
+                <li><a href="#" data-tab="create-manual"><span class="sidebar-icon"><i class="fas fa-user-plus"></i></span> Create Account Manually</a></li>
+                <li><a href="#" data-tab="admin-management"><span class="sidebar-icon"><i class="fas fa-user-shield"></i></span> Admin Management</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <a href="LogIn.html" class="sidebar-logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <div id="dashboard" class="tab-content active">
+                <div class="admin-section">
+                    <h2 class="section-title"><i class="fas fa-tachometer-alt"></i> Registration Dashboard</h2>
+                    
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+                            <div class="stat-value" id="system-status">Ready</div>
+                            <div class="stat-label">System Status</div>
+                        </div>
+                    
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-users">0</div>
+                            <div class="stat-label">Total Users</div>
+                        </div>
+                    
+                        <div class="stat-card">
+                            <div class="stat-value" id="active-admins">0</div>
+                            <div class="stat-label">Admin Accounts</div>
+                        </div>
+                    
+                        <div class="stat-card">
+                            <div class="stat-value" id="online-users">0</div>
+                            <div class="stat-label">Online Users</div>
+                        </div>
+                    
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-pending">0</div>
+                            <div class="stat-label">Pending Registrations</div>
+                        </div>
+                    
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-approved">0</div>
+                            <div class="stat-label">Approved Accounts</div>
+                        </div>
+                    
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-rejected">0</div>
+                            <div class="stat-label">Rejected Applications</div>
+                        </div>
+                    
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-manual">0</div>
+                            <div class="stat-label">Manual Accounts</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-value" id="last-updated">Never</div>
+                            <div class="stat-label">Last Updated</div>
+                        </div>
+                    
+                        <div class="stat-card">
+                            <div class="stat-value" id="data-size">0 KB</div>
+                            <div class="stat-label">Data Size</div>
+                        </div>                 
+                    </div>
+                    
+                    <div class="alert alert-success">
+                        <strong><i class="fas fa-check-circle"></i> System Ready!</strong> Welcome to the Barangay 118 Admin Control Panel.
+                    </div>
+                    
+                    <h3 style="margin-bottom: 15px; color: var(--dark);">Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="btn btn-primary" id="preview-site-btn">
+                            <i class="fas fa-external-link-alt"></i> Preview Site
+                        </button>
+                        <button class="btn btn-secondary" id="export-data-btn">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                        <button class="btn btn-success" id="backup-btn">
+                            <i class="fas fa-database"></i> Backup Data
+                        </button>
+                        <button class="btn btn-warning" id="refresh-btn">
+                            <i class="fas fa-sync"></i> Refresh
+                        </button>
+                        <button class="btn btn-danger" id="clear-all-data-btn">
+                            <i class="fas fa-trash"></i> Clear Data
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <h2 class="section-title"><i class="fas fa-history"></i> Recent Registration Activity</h2>
+                    <div id="recent-activity">
+                        <p style="color: var(--gray); text-align: center; padding: 20px;">
+                            <i class="fas fa-clock"></i> No recent activity...
+                        </p>
+                    </div>
+                </div>
+
+                <div class="quick-guide-center">
+                    <div class="quick-guide-header">
+                        <h2 class="quick-guide-title"><i class="fas fa-book"></i> Quick Guide</h2>
+                    </div>
+                    
+                    <div id="dashboard-guide" class="guide-section">
+                        <h4>Registration Admin Panel Guide</h4>
+                        <p>This admin panel manages all user registrations from the Barangay 118 Online System.</p>
+                        <ul>
+                            <li>Pending Registrations: Review and process new applications from users</li>
+                            <li>Approved Accounts: View successfully approved user accounts</li>
+                            <li>Rejected Applications: Review declined registrations</li>
+                            <li>All Registrations: View complete registration history</li>
+                            <li>Create Manual: Manually create user accounts for special cases</li>
+                        </ul>
+                        <p><strong>Note:</strong> All registration data is stored in Firebase Realtime Database and synchronized in real-time.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pending-registrations" class="tab-content">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-hourglass-half"></i> Pending Registrations</h2>
+                        <div class="action-buttons">
+                            <button class="btn btn-success btn-sm" id="refresh-pending-btn">
+                                <i class="fas fa-sync"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <strong><i class="fas fa-info-circle"></i> Instructions:</strong> Click on any registration to review details and approve/reject. All data is loaded from Firebase Realtime Database.
+                    </div>
+                    
+                    <div class="search-container">
+                        <input type="text" class="search-bar" id="pending-search" placeholder="Search pending registrations...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Control No.</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Date Submitted</th>
+                                <th>Documents</th>
+                                <th>Face Scan</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pending-table-body">
+                            <tr>
+                                <td colspan="8" style="text-align: center; padding: 40px; color: var(--gray);">
+                                    <i class="fas fa-spinner fa-spin"></i> Loading pending registrations from Firebase...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="no-data" id="no-pending-data" style="display: none; text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>No pending registrations found in Firebase Database.</p>
+                    </div>
+                </div>
+
+                <!-- Registration Details Modal -->
+                <div id="registration-details-modal" class="modal" style="display: none;">
+                    <div class="modal-content large">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Registration Details</h2>
+                            <button class="close-modal" id="close-details-modal">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="registration-details-body">
+                            <!-- Details will be loaded here -->
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" id="reject-registration-btn">
+                                <i class="fas fa-times"></i> Reject Application
+                            </button>
+                            <button class="btn btn-success" id="approve-registration-btn">
+                                <i class="fas fa-check"></i> Approve Application
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-guide-center">
+                    <div class="quick-guide-header">
+                        <h2 class="quick-guide-title"><i class="fas fa-book"></i> Quick Guide</h2>
+                    </div>
+                    
+                    <div id="pending-guide" class="guide-section">
+                        <h4>Pending Registrations Management</h4>
+                        <p>Review and process new registration applications submitted by users.</p>
+                        <ul>
+                            <li>View Details: Click "View" to see complete application with all submitted information</li>
+                            <li>Approve: Accept valid applications to create active user accounts</li>
+                            <li>Reject: Decline applications with issues or incomplete information</li>
+                            <li>Documents: Check uploaded identification documents</li>
+                            <li>Face Scan: Verify face capture completion</li>
+                            <li><strong>Firebase:</strong> All data is loaded from Firebase Realtime Database in real-time</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="create-manual" class="tab-content">
+                <div class="admin-section">
+                    <h2 class="section-title"><i class="fas fa-user-plus"></i> Create Account Manually</h2>
+                    <p style="color: var(--gray); margin-bottom: 25px;">Use this form to create user accounts manually. This bypasses the regular registration process.</p>
+                    
+                    <form id="manual-account-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="manual-last-name">Last Name *</label>
+                                <input type="text" class="form-control" id="manual-last-name" placeholder="Enter last name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="manual-first-name">First Name *</label>
+                                <input type="text" class="form-control" id="manual-first-name" placeholder="Enter first name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="manual-middle-name">Middle Name</label>
+                            <input type="text" class="form-control" id="manual-middle-name" placeholder="Enter middle name (optional)">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="manual-email">Email Address *</label>
+                                <input type="email" class="form-control" id="manual-email" placeholder="Enter email address" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="manual-phone">Phone Number</label>
+                                <input type="tel" class="form-control" id="manual-phone" placeholder="Enter phone number">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="manual-password">Password *</label>
+                                <input type="password" class="form-control" id="manual-password" placeholder="Create password" required minlength="6">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="manual-confirm-password">Confirm Password *</label>
+                                <input type="password" class="form-control" id="manual-confirm-password" placeholder="Confirm password" required minlength="6">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="manual-address">Complete Address *</label>
+                            <textarea class="form-control" id="manual-address" placeholder="Enter complete address" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="manual-date-of-birth">Date of Birth *</label>
+                                <input type="date" class="form-control" id="manual-date-of-birth" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="manual-gender">Gender *</label>
+                                <select class="form-control" id="manual-gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="manual-role">Account Role *</label>
+                            <select class="form-control" id="manual-role" required>
+                                <option value="user">Regular User</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="manual-reason">Reason for Manual Creation</label>
+                            <textarea class="form-control" id="manual-reason" placeholder="Explain why this account is being created manually" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="action-buttons-container">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-user-plus"></i> Create Account
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i> Reset Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="quick-guide-center">
+                    <div class="quick-guide-header">
+                        <h2 class="quick-guide-title"><i class="fas fa-book"></i> Quick Guide</h2>
+                    </div>
+                    
+                    <div id="manual-guide" class="guide-section">
+                        <h4>Manual Account Creation</h4>
+                        <p>Create user accounts manually for special cases or administrative purposes.</p>
+                        <ul>
+                            <li>Required Fields: Fill in all fields marked with *</li>
+                            <li>Password: Minimum 6 characters</li>
+                            <li>Email: Must be valid email format</li>
+                            <li>Role Selection: Choose between Regular User or Administrator</li>
+                            <li><strong>Firebase:</strong> Account will be saved to Firebase Realtime Database</li>
+                            <li>Auto-Approved: Manual accounts are automatically approved</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="approved-accounts" class="tab-content">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-check-circle"></i> Approved Accounts</h2>
+                        <div class="action-buttons">
+                            <button class="btn btn-success btn-sm" id="refresh-approved-btn">
+                                <i class="fas fa-sync"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="search-container">
+                        <input type="text" class="search-bar" id="approved-search" placeholder="Search approved accounts...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Control No.</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Date Approved</th>
+                                <th>Approved By</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="approved-table-body">
+                            <tr>
+                                <td colspan="7" style="text-align: center; padding: 40px; color: var(--gray);">
+                                    <i class="fas fa-spinner fa-spin"></i> Loading approved accounts from Firebase...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="no-data" id="no-approved-data" style="display: none; text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-check-circle" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>No approved accounts found in Firebase Database.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rejected-applications" class="tab-content">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-times-circle"></i> Rejected Applications</h2>
+                        <div class="action-buttons">
+                            <button class="btn btn-success btn-sm" id="refresh-rejected-btn">
+                                <i class="fas fa-sync"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="search-container">
+                        <input type="text" class="search-bar" id="rejected-search" placeholder="Search rejected applications...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Control No.</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Date Rejected</th>
+                                <th>Rejected By</th>
+                                <th>Reason</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rejected-table-body">
+                            <tr>
+                                <td colspan="7" style="text-align: center; padding: 40px; color: var(--gray);">
+                                    <i class="fas fa-spinner fa-spin"></i> Loading rejected applications from Firebase...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="no-data" id="no-rejected-data" style="display: none; text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-times-circle" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>No rejected applications found in Firebase Database.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="all-registrations" class="tab-content">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2 class="section-title"><i class="fas fa-list-alt"></i> All Registrations</h2>
+                        <div class="action-buttons">
+                            <button class="btn btn-success btn-sm" id="refresh-all-btn">
+                                <i class="fas fa-sync"></i> Refresh
+                            </button>
+                            <button class="btn btn-secondary btn-sm" id="export-all-btn">
+                                <i class="fas fa-download"></i> Export All
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-container">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label>Status Filter:</label>
+                                <select id="status-filter" class="filter-select">
+                                    <option value="all">All Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Date Range:</label>
+                                <input type="date" id="date-from" class="filter-date"> to
+                                <input type="date" id="date-to" class="filter-date">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="search-container">
+                        <input type="text" class="search-bar" id="all-search" placeholder="Search all registrations...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Control No.</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Date Submitted</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-table-body">
+                            <tr>
+                                <td colspan="7" style="text-align: center; padding: 40px; color: var(--gray);">
+                                    <i class="fas fa-spinner fa-spin"></i> Loading all registrations from Firebase...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="pagination" id="pagination-controls" style="display: none;">
+                        <button class="btn btn-sm" id="prev-page"><i class="fas fa-chevron-left"></i></button>
+                        <span id="page-info">Page 1 of 1</span>
+                        <button class="btn btn-sm" id="next-page"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="save-status" class="save-status">• Connecting to Firebase...</div>
+    <div id="toast" class="toast"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEbKLcaRnMeujiQ2XWx8f5TqTlTC71c0w",
+            authDomain: "barangay118-website.firebaseapp.com",
+            databaseURL: "https://barangay118-website-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "barangay118-website",
+            storageBucket: "barangay118-website.firebasestorage.app",
+            messagingSenderId: "255746664706",
+            appId: "1:255746664706:web:61d9cd618960147ef6ba1b",
+            measurementId: "G-CQFZYJED7Z"
+        };
+
+        // Initialize Firebase
+        let db = null;
+        let registrationsRef = null;
+        let usersRef = null;
+        let currentRegistrationKey = null;
+        
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            db = firebase.database();
+            registrationsRef = db.ref('registrations');
+            usersRef = db.ref('users');
+            console.log("Firebase initialized successfully in Admin Panel!");
+        } catch (error) {
+            console.error("Firebase initialization error:", error);
+        }
+
+        class RegistrationAdminPanel {
+            constructor() {
+                this.allRegistrations = [];
+                this.filteredRegistrations = [];
+                this.currentPage = 1;
+                this.itemsPerPage = 10;
+                this.activityLog = [];
+                this.currentView = 'dashboard';
+                this.init();
+            }
+
+            init() {
+                if (db) {
+                    this.updateSaveStatus('• Connected to Firebase', 'success');
+                    this.setupFirebaseListeners();
+                } else {
+                    this.updateSaveStatus('• Firebase Not Connected', 'error');
+                    this.showToast('Firebase not connected. Please check configuration.', 'error');
+                }
+                
+                this.setupEventListeners();
+                this.loadDashboardStats();
+                this.switchTab('dashboard');
+            }
+
+            setupFirebaseListeners() {
+                // Listen for new registrations
+                registrationsRef.on('value', (snapshot) => {
+                    this.allRegistrations = [];
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        Object.keys(data).forEach(key => {
+                            this.allRegistrations.push({
+                                key: key,
+                                ...data[key]
+                            });
+                        });
+                        
+                        console.log(`Loaded ${this.allRegistrations.length} registrations from Firebase`);
+                        this.loadDashboardStats();
+                        
+                        // Refresh current view if it's a registration list
+                        if (this.currentView === 'pending-registrations') {
+                            this.loadPendingRegistrations();
+                        } else if (this.currentView === 'approved-accounts') {
+                            this.loadApprovedAccounts();
+                        } else if (this.currentView === 'rejected-applications') {
+                            this.loadRejectedApplications();
+                        } else if (this.currentView === 'all-registrations') {
+                            this.loadAllRegistrations();
+                        }
+                    }
+                }, (error) => {
+                    console.error("Error reading from Firebase:", error);
+                    this.updateSaveStatus('• Error Reading Data', 'error');
+                });
+            }
+
+            setupEventListeners() {
+                // Tab navigation
+                document.querySelector('.sidebar-menu').addEventListener('click', (e) => {
+                    const link = e.target.closest('a');
+                    if (link && link.hasAttribute('data-tab')) {
+                        e.preventDefault();
+                        const tabId = link.getAttribute('data-tab');
+                        this.switchTab(tabId);
+                    }
+                });
+
+                // Quick action buttons
+                document.getElementById('preview-site-btn').addEventListener('click', () => {
+                    window.open('CreateAnAccount.html', '_blank');
+                });
+
+                document.getElementById('export-data-btn').addEventListener('click', () => {
+                    this.exportData();
+                });
+
+                document.getElementById('refresh-btn').addEventListener('click', () => {
+                    this.loadDashboardStats();
+                    this.showToast('Dashboard refreshed!', 'success');
+                });
+
+                // Refresh buttons for each tab
+                document.getElementById('refresh-pending-btn').addEventListener('click', () => {
+                    this.loadPendingRegistrations();
+                });
+
+                document.getElementById('refresh-approved-btn').addEventListener('click', () => {
+                    this.loadApprovedAccounts();
+                });
+
+                document.getElementById('refresh-rejected-btn').addEventListener('click', () => {
+                    this.loadRejectedApplications();
+                });
+
+                document.getElementById('refresh-all-btn').addEventListener('click', () => {
+                    this.loadAllRegistrations();
+                });
+
+                // Export all button
+                document.getElementById('export-all-btn').addEventListener('click', () => {
+                    this.exportAllRegistrations();
+                });
+
+                // Manual account form
+                document.getElementById('manual-account-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.createManualAccount();
+                });
+
+                // Search functionality
+                document.getElementById('pending-search').addEventListener('input', (e) => {
+                    this.searchTable('pending', e.target.value);
+                });
+
+                document.getElementById('approved-search').addEventListener('input', (e) => {
+                    this.searchTable('approved', e.target.value);
+                });
+
+                document.getElementById('rejected-search').addEventListener('input', (e) => {
+                    this.searchTable('rejected', e.target.value);
+                });
+
+                document.getElementById('all-search').addEventListener('input', (e) => {
+                    this.searchTable('all', e.target.value);
+                });
+
+                // Status filter
+                document.getElementById('status-filter').addEventListener('change', (e) => {
+                    this.filterAllRegistrations();
+                });
+
+                // Date filters
+                document.getElementById('date-from').addEventListener('change', () => {
+                    this.filterAllRegistrations();
+                });
+
+                document.getElementById('date-to').addEventListener('change', () => {
+                    this.filterAllRegistrations();
+                });
+
+                // Pagination
+                document.getElementById('prev-page').addEventListener('click', () => {
+                    if (this.currentPage > 1) {
+                        this.currentPage--;
+                        this.renderAllRegistrationsPage();
+                    }
+                });
+
+                document.getElementById('next-page').addEventListener('click', () => {
+                    const totalPages = Math.ceil(this.filteredRegistrations.length / this.itemsPerPage);
+                    if (this.currentPage < totalPages) {
+                        this.currentPage++;
+                        this.renderAllRegistrationsPage();
+                    }
+                });
+
+                // Modal close button
+                document.getElementById('close-details-modal').addEventListener('click', () => {
+                    this.closeRegistrationDetails();
+                });
+
+                // Approve/Reject buttons
+                document.getElementById('approve-registration-btn').addEventListener('click', () => {
+                    this.approveRegistration();
+                });
+
+                document.getElementById('reject-registration-btn').addEventListener('click', () => {
+                    this.rejectRegistration();
+                });
+            }
+
+            switchTab(tabId) {
+                this.currentView = tabId;
+                
+                // Update active tab in sidebar
+                document.querySelectorAll('.sidebar-menu a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                const targetLink = document.querySelector(`[data-tab="${tabId}"]`);
+                if (targetLink) targetLink.classList.add('active');
+                
+                // Show selected tab content
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                const selectedTab = document.getElementById(tabId);
+                if (selectedTab) selectedTab.classList.add('active');
+                
+                // Load data for the selected tab
+                switch(tabId) {
+                    case 'pending-registrations':
+                        this.loadPendingRegistrations();
+                        break;
+                    case 'approved-accounts':
+                        this.loadApprovedAccounts();
+                        break;
+                    case 'rejected-applications':
+                        this.loadRejectedApplications();
+                        break;
+                    case 'all-registrations':
+                        this.loadAllRegistrations();
+                        break;
+                    case 'dashboard':
+                        this.loadDashboardStats();
+                        break;
+                }
+            }
+
+            loadDashboardStats() {
+                if (!this.allRegistrations) return;
+                
+                const pending = this.allRegistrations.filter(r => r.status === 'pending').length;
+                const approved = this.allRegistrations.filter(r => r.status === 'approved').length;
+                const rejected = this.allRegistrations.filter(r => r.status === 'rejected').length;
+                const manual = this.allRegistrations.filter(r => r.manualCreation === true).length;
+                const totalUsers = approved; // Approved registrations become users
+                
+                // Update stats
+                document.getElementById('total-pending').textContent = pending;
+                document.getElementById('total-approved').textContent = approved;
+                document.getElementById('total-rejected').textContent = rejected;
+                document.getElementById('total-manual').textContent = manual;
+                document.getElementById('total-users').textContent = totalUsers;
+                document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+                document.getElementById('data-size').textContent = `${Math.round(JSON.stringify(this.allRegistrations).length / 1024)} KB`;
+                
+                // Update system status
+                const statusEl = document.getElementById('system-status');
+                if (db) {
+                    statusEl.innerHTML = '<i class="fas fa-check-circle" style="color: #28a745;"></i> Online';
+                } else {
+                    statusEl.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #dc3545;"></i> Offline';
+                }
+                
+                // Update recent activity
+                this.updateRecentActivity();
+            }
+
+            loadPendingRegistrations() {
+                const tbody = document.getElementById('pending-table-body');
+                const noData = document.getElementById('no-pending-data');
+                
+                if (!this.allRegistrations || this.allRegistrations.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 40px; color: var(--gray);">
+                                <i class="fas fa-database" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                                <p>No registrations found in Firebase Database.</p>
+                            </td>
+                        </tr>
+                    `;
+                    if (noData) noData.style.display = 'block';
+                    return;
+                }
+                
+                const pendingRegistrations = this.allRegistrations.filter(r => r.status === 'pending');
+                
+                if (pendingRegistrations.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 40px; color: var(--gray);">
+                                <i class="fas fa-check" style="font-size: 48px; margin-bottom: 15px; color: #28a745; opacity: 0.5;"></i>
+                                <p>No pending registrations. All caught up!</p>
+                            </td>
+                        </tr>
+                    `;
+                    if (noData) noData.style.display = 'block';
+                    return;
+                }
+                
+                if (noData) noData.style.display = 'none';
+                tbody.innerHTML = '';
+                
+                // Sort by submission date (newest first)
+                pendingRegistrations.sort((a, b) => {
+                    return (b.submittedTimestamp || 0) - (a.submittedTimestamp || 0);
+                });
+                
+                pendingRegistrations.forEach(reg => {
+                    const fullName = `${reg.personalInfo?.lastName || ''}, ${reg.personalInfo?.firstName || ''} ${reg.personalInfo?.middleName || ''}`.trim();
+                    const email = reg.accountInfo?.email || 'N/A';
+                    const dateSubmitted = reg.submittedAt || 'N/A';
+                    const controlNumber = reg.controlNumber || 'N/A';
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${controlNumber}</td>
+                        <td>${fullName}</td>
+                        <td>${email}</td>
+                        <td>${dateSubmitted}</td>
+                        <td>
+                            <span class="doc-status ${reg.documents?.idFrontPreviewSrc ? 'doc-verified' : 'doc-missing'}">
+                                <i class="fas fa-${reg.documents?.idFrontPreviewSrc ? 'check' : 'times'}"></i>
+                                ${reg.documents?.idFrontPreviewSrc ? 'Uploaded' : 'Missing'}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="doc-status ${reg.faceCaptures?.flags?.front ? 'doc-verified' : 'doc-missing'}">
+                                <i class="fas fa-${reg.faceCaptures?.flags?.front ? 'check' : 'times'}"></i>
+                                ${reg.faceCaptures?.flags?.front ? 'Complete' : 'Incomplete'}
+                            </span>
+                        </td>
+                        <td><span class="badge pending">Pending</span></td>
+                        <td>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary btn-sm view-registration-btn" data-key="${reg.key}">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-registration-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const key = e.target.closest('.view-registration-btn').getAttribute('data-key');
+                        this.showRegistrationDetails(key);
+                    });
+                });
+            }
+
+            loadApprovedAccounts() {
+                const tbody = document.getElementById('approved-table-body');
+                const noData = document.getElementById('no-approved-data');
+                
+                const approvedRegistrations = this.allRegistrations.filter(r => r.status === 'approved');
+                
+                if (approvedRegistrations.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 40px; color: var(--gray);">
+                                <i class="fas fa-check-circle" style="font-size: 48px; margin-bottom: 15px; color: #28a745; opacity: 0.5;"></i>
+                                <p>No approved accounts found.</p>
+                            </td>
+                        </tr>
+                    `;
+                    if (noData) noData.style.display = 'block';
+                    return;
+                }
+                
+                if (noData) noData.style.display = 'none';
+                tbody.innerHTML = '';
+                
+                // Sort by approval date (newest first)
+                approvedRegistrations.sort((a, b) => {
+                    return (b.approvedTimestamp || 0) - (a.approvedTimestamp || 0);
+                });
+                
+                approvedRegistrations.forEach(reg => {
+                    const fullName = `${reg.personalInfo?.lastName || ''}, ${reg.personalInfo?.firstName || ''} ${reg.personalInfo?.middleName || ''}`.trim();
+                    const email = reg.accountInfo?.email || 'N/A';
+                    const dateApproved = reg.approvedAt || 'N/A';
+                    const approvedBy = reg.approvedBy || 'System';
+                    const controlNumber = reg.controlNumber || 'N/A';
+                    const role = reg.role || 'user';
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${controlNumber}</td>
+                        <td>${fullName}</td>
+                        <td>${email}</td>
+                        <td>${dateApproved}</td>
+                        <td>${approvedBy}</td>
+                        <td><span class="badge ${role === 'admin' ? 'admin' : 'user'}">${role === 'admin' ? 'Admin' : 'User'}</span></td>
+                        <td>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary btn-sm view-registration-btn" data-key="${reg.key}">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-registration-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const key = e.target.closest('.view-registration-btn').getAttribute('data-key');
+                        this.showRegistrationDetails(key);
+                    });
+                });
+            }
+
+            loadRejectedApplications() {
+                const tbody = document.getElementById('rejected-table-body');
+                const noData = document.getElementById('no-rejected-data');
+                
+                const rejectedRegistrations = this.allRegistrations.filter(r => r.status === 'rejected');
+                
+                if (rejectedRegistrations.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 40px; color: var(--gray);">
+                                <i class="fas fa-times-circle" style="font-size: 48px; margin-bottom: 15px; color: #dc3545; opacity: 0.5;"></i>
+                                <p>No rejected applications found.</p>
+                            </td>
+                        </tr>
+                    `;
+                    if (noData) noData.style.display = 'block';
+                    return;
+                }
+                
+                if (noData) noData.style.display = 'none';
+                tbody.innerHTML = '';
+                
+                // Sort by rejection date (newest first)
+                rejectedRegistrations.sort((a, b) => {
+                    return (b.rejectedTimestamp || 0) - (a.rejectedTimestamp || 0);
+                });
+                
+                rejectedRegistrations.forEach(reg => {
+                    const fullName = `${reg.personalInfo?.lastName || ''}, ${reg.personalInfo?.firstName || ''} ${reg.personalInfo?.middleName || ''}`.trim();
+                    const email = reg.accountInfo?.email || 'N/A';
+                    const dateRejected = reg.rejectedAt || 'N/A';
+                    const rejectedBy = reg.rejectedBy || 'System';
+                    const rejectionReason = reg.rejectionReason || 'No reason provided';
+                    const controlNumber = reg.controlNumber || 'N/A';
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${controlNumber}</td>
+                        <td>${fullName}</td>
+                        <td>${email}</td>
+                        <td>${dateRejected}</td>
+                        <td>${rejectedBy}</td>
+                        <td title="${rejectionReason}">${rejectionReason.length > 30 ? rejectionReason.substring(0, 30) + '...' : rejectionReason}</td>
+                        <td>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary btn-sm view-registration-btn" data-key="${reg.key}">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-registration-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const key = e.target.closest('.view-registration-btn').getAttribute('data-key');
+                        this.showRegistrationDetails(key);
+                    });
+                });
+            }
+
+            loadAllRegistrations() {
+                this.filteredRegistrations = [...this.allRegistrations];
+                this.currentPage = 1;
+                this.filterAllRegistrations();
+            }
+
+            filterAllRegistrations() {
+                let filtered = [...this.allRegistrations];
+                
+                // Apply status filter
+                const statusFilter = document.getElementById('status-filter').value;
+                if (statusFilter !== 'all') {
+                    filtered = filtered.filter(r => r.status === statusFilter);
+                }
+                
+                // Apply date filter
+                const dateFrom = document.getElementById('date-from').value;
+                const dateTo = document.getElementById('date-to').value;
+                
+                if (dateFrom) {
+                    const fromDate = new Date(dateFrom);
+                    filtered = filtered.filter(r => {
+                        const regDate = new Date(r.registrationDate || r.submittedAt);
+                        return regDate >= fromDate;
+                    });
+                }
+                
+                if (dateTo) {
+                    const toDate = new Date(dateTo);
+                    toDate.setHours(23, 59, 59, 999); // End of day
+                    filtered = filtered.filter(r => {
+                        const regDate = new Date(r.registrationDate || r.submittedAt);
+                        return regDate <= toDate;
+                    });
+                }
+                
+                this.filteredRegistrations = filtered;
+                this.renderAllRegistrationsPage();
+            }
+
+            renderAllRegistrationsPage() {
+                const tbody = document.getElementById('all-table-body');
+                const pagination = document.getElementById('pagination-controls');
+                
+                if (this.filteredRegistrations.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 40px; color: var(--gray);">
+                                <i class="fas fa-search" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                                <p>No registrations match your filters.</p>
+                            </td>
+                        </tr>
+                    `;
+                    pagination.style.display = 'none';
+                    return;
+                }
+                
+                // Sort by date (newest first)
+                this.filteredRegistrations.sort((a, b) => {
+                    return (b.submittedTimestamp || 0) - (a.submittedTimestamp || 0);
+                });
+                
+                // Calculate pagination
+                const totalPages = Math.ceil(this.filteredRegistrations.length / this.itemsPerPage);
+                const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+                const endIndex = startIndex + this.itemsPerPage;
+                const pageData = this.filteredRegistrations.slice(startIndex, endIndex);
+                
+                tbody.innerHTML = '';
+                
+                pageData.forEach(reg => {
+                    const fullName = `${reg.personalInfo?.lastName || ''}, ${reg.personalInfo?.firstName || ''} ${reg.personalInfo?.middleName || ''}`.trim();
+                    const email = reg.accountInfo?.email || 'N/A';
+                    const dateSubmitted = reg.submittedAt || 'N/A';
+                    const controlNumber = reg.controlNumber || 'N/A';
+                    const type = reg.manualCreation ? 'Manual' : 'Online';
+                    
+                    let statusBadge = '';
+                    switch(reg.status) {
+                        case 'pending':
+                            statusBadge = '<span class="badge pending">Pending</span>';
+                            break;
+                        case 'approved':
+                            statusBadge = '<span class="badge approved">Approved</span>';
+                            break;
+                        case 'rejected':
+                            statusBadge = '<span class="badge rejected">Rejected</span>';
+                            break;
+                        default:
+                            statusBadge = `<span class="badge">${reg.status}</span>`;
+                    }
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${controlNumber}</td>
+                        <td>${fullName}</td>
+                        <td>${email}</td>
+                        <td>${dateSubmitted}</td>
+                        <td>${statusBadge}</td>
+                        <td>${type}</td>
+                        <td>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-primary btn-sm view-registration-btn" data-key="${reg.key}">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                
+                // Update pagination controls
+                document.getElementById('page-info').textContent = `Page ${this.currentPage} of ${totalPages}`;
+                document.getElementById('prev-page').disabled = this.currentPage === 1;
+                document.getElementById('next-page').disabled = this.currentPage === totalPages;
+                pagination.style.display = totalPages > 1 ? 'flex' : 'none';
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-registration-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const key = e.target.closest('.view-registration-btn').getAttribute('data-key');
+                        this.showRegistrationDetails(key);
+                    });
+                });
+            }
+
+            searchTable(tableType, query) {
+                const searchText = query.toLowerCase().trim();
+                if (!searchText) {
+                    // Reset to original data
+                    switch(tableType) {
+                        case 'pending':
+                            this.loadPendingRegistrations();
+                            break;
+                        case 'approved':
+                            this.loadApprovedAccounts();
+                            break;
+                        case 'rejected':
+                            this.loadRejectedApplications();
+                            break;
+                        case 'all':
+                            this.filterAllRegistrations();
+                            break;
+                    }
+                    return;
+                }
+                
+                let data = [];
+                switch(tableType) {
+                    case 'pending':
+                        data = this.allRegistrations.filter(r => r.status === 'pending');
+                        break;
+                    case 'approved':
+                        data = this.allRegistrations.filter(r => r.status === 'approved');
+                        break;
+                    case 'rejected':
+                        data = this.allRegistrations.filter(r => r.status === 'rejected');
+                        break;
+                    case 'all':
+                        data = this.filteredRegistrations;
+                        break;
+                }
+                
+                const filtered = data.filter(reg => {
+                    const fullName = `${reg.personalInfo?.lastName || ''} ${reg.personalInfo?.firstName || ''} ${reg.personalInfo?.middleName || ''}`.toLowerCase();
+                    const email = (reg.accountInfo?.email || '').toLowerCase();
+                    const controlNumber = (reg.controlNumber || '').toLowerCase();
+                    
+                    return fullName.includes(searchText) || 
+                           email.includes(searchText) || 
+                           controlNumber.includes(searchText);
+                });
+                
+                this.renderSearchResults(tableType, filtered);
+            }
+
+            renderSearchResults(tableType, results) {
+                const tbody = document.getElementById(`${tableType}-table-body`);
+                const noData = document.getElementById(`no-${tableType}-data`);
+                
+                if (results.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="${tableType === 'all' ? 7 : 8}" style="text-align: center; padding: 40px; color: var(--gray);">
+                                <i class="fas fa-search" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+                                <p>No results found for your search.</p>
+                            </td>
+                        </tr>
+                    `;
+                    if (noData) noData.style.display = 'none';
+                    return;
+                }
+                
+                tbody.innerHTML = '';
+                
+                results.forEach(reg => {
+                    const fullName = `${reg.personalInfo?.lastName || ''}, ${reg.personalInfo?.firstName || ''} ${reg.personalInfo?.middleName || ''}`.trim();
+                    const email = reg.accountInfo?.email || 'N/A';
+                    const date = reg.submittedAt || 'N/A';
+                    const controlNumber = reg.controlNumber || 'N/A';
+                    
+                    let rowHTML = '';
+                    
+                    switch(tableType) {
+                        case 'pending':
+                            rowHTML = `
+                                <td>${controlNumber}</td>
+                                <td>${fullName}</td>
+                                <td>${email}</td>
+                                <td>${date}</td>
+                                <td>
+                                    <span class="doc-status ${reg.documents?.idFrontPreviewSrc ? 'doc-verified' : 'doc-missing'}">
+                                        <i class="fas fa-${reg.documents?.idFrontPreviewSrc ? 'check' : 'times'}"></i>
+                                        ${reg.documents?.idFrontPreviewSrc ? 'Uploaded' : 'Missing'}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="doc-status ${reg.faceCaptures?.flags?.front ? 'doc-verified' : 'doc-missing'}">
+                                        <i class="fas fa-${reg.faceCaptures?.flags?.front ? 'check' : 'times'}"></i>
+                                        ${reg.faceCaptures?.flags?.front ? 'Complete' : 'Incomplete'}
+                                    </span>
+                                </td>
+                                <td><span class="badge pending">Pending</span></td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <button class="btn btn-primary btn-sm view-registration-btn" data-key="${reg.key}">
+                                            <i class="fas fa-eye"></i> View
+                                        </button>
+                                    </div>
+                                </td>
+                            `;
+                            break;
+                            
+                        case 'approved':
+                            const approvedBy = reg.approvedBy || 'System';
+                            const role = reg.role || 'user';
+                            rowHTML = `
+                                <td>${controlNumber}</td>
+                                <td>${fullName}</td>
+                                <td>${email}</td>
+                                <td>${reg.approvedAt || 'N/A'}</td>
+                                <td>${approvedBy}</td>
+                                <td><span class="badge ${role === 'admin' ? 'admin' : 'user'}">${role === 'admin' ? 'Admin' : 'User'}</span></td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <button class="btn btn-primary btn-sm view-registration-btn" data-key="${reg.key}">
+                                            <i class="fas fa-eye"></i> View
+                                        </button>
+                                    </div>
+                                </td>
+                            `;
+                            break;
+                            
+                        case 'rejected':
+                            const rejectedBy = reg.rejectedBy || 'System';
+                            const rejectionReason = reg.rejectionReason || 'No reason provided';
+                            rowHTML = `
+                                <td>${controlNumber}</td>
+                                <td>${fullName}</td>
+                                <td>${email}</td>
+                                <td>${reg.rejectedAt || 'N/A'}</td>
+                                <td>${rejectedBy}</td>
+                                <td title="${rejectionReason}">${rejectionReason.length > 30 ? rejectionReason.substring(0, 30) + '...' : rejectionReason}</td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <button class="btn btn-primary btn-sm view-registration-btn" data-key="${reg.key}">
+                                            <i class="fas fa-eye"></i> View
+                                        </button>
+                                    </div>
+                                </td>
+                            `;
+                            break;
+                            
+                        case 'all':
+                            const type = reg.manualCreation ? 'Manual' : 'Online';
+                            let statusBadge = '';
+                            switch(reg.status) {
+                                case 'pending':
+                                    statusBadge = '<span class="badge pending">Pending</span>';
+                                    break;
+                                case 'approved':
+                                    statusBadge = '<span class="badge approved">Approved</span>';
+                                    break;
+                                case 'rejected':
+                                    statusBadge = '<span class="badge rejected">Rejected</span>';
+                                    break;
+                            }
+                            rowHTML = `
+                                <td>${controlNumber}</td>
+                                <td>${fullName}</td>
+                                <td>${email}</td>
+                                <td>${date}</td>
+                                <td>${statusBadge}</td>
+                                <td>${type}</td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <button class="btn btn-primary btn-sm view-registration-btn" data-key="${reg.key}">
+                                            <i class="fas fa-eye"></i> View
+                                        </button>
+                                    </div>
+                                </td>
+                            `;
+                            break;
+                    }
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = rowHTML;
+                    tbody.appendChild(row);
+                });
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-registration-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const key = e.target.closest('.view-registration-btn').getAttribute('data-key');
+                        this.showRegistrationDetails(key);
+                    });
+                });
+            }
+
+            showRegistrationDetails(key) {
+                const registration = this.allRegistrations.find(r => r.key === key);
+                if (!registration) {
+                    this.showToast('Registration not found!', 'error');
+                    return;
+                }
+                
+                currentRegistrationKey = key;
+                
+                const modal = document.getElementById('registration-details-modal');
+                const body = document.getElementById('registration-details-body');
+                
+                // Build registration details HTML
+                const personalInfo = registration.personalInfo || {};
+                const accountInfo = registration.accountInfo || {};
+                const householdInfo = registration.householdInfo || {};
+                const documents = registration.documents || {};
+                const faceCaptures = registration.faceCaptures || {};
+                
+                let detailsHTML = `
+                    <div class="registration-details">
+                        <div class="details-section">
+                            <h3><i class="fas fa-id-card"></i> Registration Information</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>Control Number:</strong> ${registration.controlNumber || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Status:</strong> <span class="badge ${registration.status}">${registration.status}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Submitted:</strong> ${registration.submittedAt || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Type:</strong> ${registration.manualCreation ? 'Manual Creation' : 'Online Registration'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h3><i class="fas fa-user"></i> Personal Information</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>Full Name:</strong> ${personalInfo.lastName || ''}, ${personalInfo.firstName || ''} ${personalInfo.middleName || ''}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Extension:</strong> ${personalInfo.extName || 'N/A'} ${personalInfo.otherExt ? `(${personalInfo.otherExt})` : ''}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Gender:</strong> ${personalInfo.gender || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Date of Birth:</strong> ${personalInfo.dateOfBirth || 'N/A'} (Age: ${personalInfo.age || 'N/A'})
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Place of Birth:</strong> ${personalInfo.placeOfBirth || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Civil Status:</strong> ${personalInfo.civilStatus || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Citizenship:</strong> ${personalInfo.citizenship || 'N/A'} ${personalInfo.otherCitizenship ? `(${personalInfo.otherCitizenship})` : ''}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Occupation:</strong> ${personalInfo.occupation || 'N/A'} ${personalInfo.otherOccupation ? `(${personalInfo.otherOccupation})` : ''}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Phone:</strong> ${personalInfo.phone || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Address:</strong> ${personalInfo.address || 'N/A'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h3><i class="fas fa-home"></i> Household Information</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>Household Members:</strong> ${householdInfo.householdMembers || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Property Owner:</strong> ${householdInfo.ownerName || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Precinct Number:</strong> ${householdInfo.precinctNo || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Years in Barangay:</strong> ${householdInfo.yearsInBarangay || 'N/A'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h3><i class="fas fa-envelope"></i> Account Information</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>Email:</strong> ${accountInfo.email || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Email Verified:</strong> ${accountInfo.emailVerified ? 'Yes' : 'No'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h3><i class="fas fa-file-upload"></i> Document Information</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>ID Type:</strong> ${documents.idType || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Reason for Registration:</strong> ${documents.userReason || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>ID Front Uploaded:</strong> ${documents.idFrontPreviewSrc ? 'Yes' : 'No'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>ID Back Uploaded:</strong> ${documents.idBackPreviewSrc ? 'Yes' : 'No'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h3><i class="fas fa-camera"></i> Face Verification Status</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>Front Face:</strong> ${faceCaptures.flags?.front ? 'Captured' : 'Not Captured'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Left Side:</strong> ${faceCaptures.flags?.left ? 'Captured' : 'Not Captured'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Right Side:</strong> ${faceCaptures.flags?.right ? 'Captured' : 'Not Captured'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Closed Eyes:</strong> ${faceCaptures.flags?.closed ? 'Captured' : 'Not Captured'}
+                                </div>
+                            </div>
+                        </div>
+                `;
+                
+                // Add special categories if they exist
+                if (personalInfo.specialCategories && personalInfo.specialCategories.length > 0) {
+                    detailsHTML += `
+                        <div class="details-section">
+                            <h3><i class="fas fa-tags"></i> Special Categories</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>Categories:</strong> ${personalInfo.specialCategories.join(', ')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Add approval/rejection info if applicable
+                if (registration.status === 'approved') {
+                    detailsHTML += `
+                        <div class="details-section">
+                            <h3><i class="fas fa-check-circle"></i> Approval Information</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>Approved By:</strong> ${registration.approvedBy || 'System'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Approved At:</strong> ${registration.approvedAt || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Account Role:</strong> ${registration.role || 'user'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (registration.status === 'rejected') {
+                    detailsHTML += `
+                        <div class="details-section">
+                            <h3><i class="fas fa-times-circle"></i> Rejection Information</h3>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <strong>Rejected By:</strong> ${registration.rejectedBy || 'System'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Rejected At:</strong> ${registration.rejectedAt || 'N/A'}
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Rejection Reason:</strong> ${registration.rejectionReason || 'No reason provided'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                detailsHTML += '</div>';
+                body.innerHTML = detailsHTML;
+                modal.style.display = 'block';
+                
+                // Show/hide action buttons based on status
+                const approveBtn = document.getElementById('approve-registration-btn');
+                const rejectBtn = document.getElementById('reject-registration-btn');
+                
+                if (registration.status === 'pending') {
+                    approveBtn.style.display = 'inline-block';
+                    rejectBtn.style.display = 'inline-block';
+                } else {
+                    approveBtn.style.display = 'none';
+                    rejectBtn.style.display = 'none';
+                }
+            }
+
+            closeRegistrationDetails() {
+                const modal = document.getElementById('registration-details-modal');
+                modal.style.display = 'none';
+                currentRegistrationKey = null;
+            }
+
+            async approveRegistration() {
+                if (!currentRegistrationKey) {
+                    this.showToast('No registration selected!', 'error');
+                    return;
+                }
+                
+                const registration = this.allRegistrations.find(r => r.key === currentRegistrationKey);
+                if (!registration) {
+                    this.showToast('Registration not found!', 'error');
+                    return;
+                }
+                
+                // Ask for role
+                const role = prompt("Select account role:\n1. user (Regular User)\n2. admin (Administrator)\n\nEnter 'user' or 'admin':", "user");
+                if (!role || !['user', 'admin'].includes(role.toLowerCase())) {
+                    this.showToast('Invalid role selected. Approval cancelled.', 'error');
+                    return;
+                }
+                
+                const adminName = prompt("Enter your name (for audit trail):", "Administrator");
+                if (!adminName) {
+                    this.showToast('Approval cancelled. Admin name is required.', 'error');
+                    return;
+                }
+                
+                try {
+                    // Update registration status in Firebase
+                    await registrationsRef.child(currentRegistrationKey).update({
+                        status: 'approved',
+                        approvedBy: adminName,
+                        approvedAt: new Date().toLocaleString(),
+                        approvedTimestamp: Date.now(),
+                        role: role.toLowerCase()
+                    });
+                    
+                    // Also create a user account in the users node
+                    const userData = {
+                        controlNumber: registration.controlNumber,
+                        email: registration.accountInfo?.email,
+                        password: registration.accountInfo?.password, // Note: In production, hash passwords!
+                        personalInfo: registration.personalInfo,
+                        householdInfo: registration.householdInfo,
+                        role: role.toLowerCase(),
+                        status: 'active',
+                        approvedBy: adminName,
+                        approvedAt: new Date().toLocaleString(),
+                        createdAt: new Date().toISOString(),
+                        lastLogin: null
+                    };
+                    
+                    await usersRef.push(userData);
+                    
+                    this.showToast(`Registration approved successfully! Account created as ${role}.`, 'success');
+                    this.logActivity(`Approved registration: ${registration.controlNumber} as ${role}`, 'success');
+                    this.closeRegistrationDetails();
+                    
+                } catch (error) {
+                    console.error('Error approving registration:', error);
+                    this.showToast('Error approving registration. Please try again.', 'error');
+                }
+            }
+
+            async rejectRegistration() {
+                if (!currentRegistrationKey) {
+                    this.showToast('No registration selected!', 'error');
+                    return;
+                }
+                
+                const registration = this.allRegistrations.find(r => r.key === currentRegistrationKey);
+                if (!registration) {
+                    this.showToast('Registration not found!', 'error');
+                    return;
+                }
+                
+                const reason = prompt("Enter rejection reason:", "Incomplete information");
+                if (!reason) {
+                    this.showToast('Rejection cancelled. Reason is required.', 'error');
+                    return;
+                }
+                
+                const adminName = prompt("Enter your name (for audit trail):", "Administrator");
+                if (!adminName) {
+                    this.showToast('Rejection cancelled. Admin name is required.', 'error');
+                    return;
+                }
+                
+                try {
+                    // Update registration status in Firebase
+                    await registrationsRef.child(currentRegistrationKey).update({
+                        status: 'rejected',
+                        rejectedBy: adminName,
+                        rejectedAt: new Date().toLocaleString(),
+                        rejectedTimestamp: Date.now(),
+                        rejectionReason: reason
+                    });
+                    
+                    this.showToast('Registration rejected successfully!', 'success');
+                    this.logActivity(`Rejected registration: ${registration.controlNumber} - Reason: ${reason}`, 'warning');
+                    this.closeRegistrationDetails();
+                    
+                } catch (error) {
+                    console.error('Error rejecting registration:', error);
+                    this.showToast('Error rejecting registration. Please try again.', 'error');
+                }
+            }
+
+            async createManualAccount() {
+                const lastName = document.getElementById('manual-last-name').value.trim();
+                const firstName = document.getElementById('manual-first-name').value.trim();
+                const middleName = document.getElementById('manual-middle-name').value.trim();
+                const email = document.getElementById('manual-email').value.trim();
+                const phone = document.getElementById('manual-phone').value.trim();
+                const password = document.getElementById('manual-password').value;
+                const confirmPassword = document.getElementById('manual-confirm-password').value;
+                const address = document.getElementById('manual-address').value.trim();
+                const dateOfBirth = document.getElementById('manual-date-of-birth').value;
+                const gender = document.getElementById('manual-gender').value;
+                const role = document.getElementById('manual-role').value;
+                const reason = document.getElementById('manual-reason').value.trim();
+                
+                // Validation
+                if (!lastName || !firstName || !email || !password || !confirmPassword || !address || !dateOfBirth || !gender || !role) {
+                    this.showToast('Please fill in all required fields!', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    this.showToast('Passwords do not match!', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    this.showToast('Password must be at least 6 characters!', 'error');
+                    return;
+                }
+                
+                // Generate control number
+                const date = new Date();
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+                const controlNumber = `BRGY118-MANUAL-${year}${month}${day}-${randomNum}`;
+                
+                const manualRegistration = {
+                    controlNumber: controlNumber,
+                    personalInfo: {
+                        lastName: lastName,
+                        firstName: firstName,
+                        middleName: middleName || '',
+                        gender: gender,
+                        dateOfBirth: dateOfBirth,
+                        address: address,
+                        phone: phone || '',
+                        citizenship: 'Filipino',
+                        occupation: 'Other',
+                        civilStatus: 'single'
+                    },
+                    accountInfo: {
+                        email: email,
+                        password: password,
+                        emailVerified: true
+                    },
+                    householdInfo: {
+                        householdMembers: '1',
+                        ownerName: 'N/A',
+                        precinctNo: 'N/A',
+                        yearsInBarangay: '0'
+                    },
+                    documents: {
+                        idType: 'none',
+                        userReason: reason || 'Manual account creation by admin'
+                    },
+                    faceCaptures: {
+                        flags: {
+                            front: false,
+                            left: false,
+                            right: false,
+                            closed: false
+                        }
+                    },
+                    status: 'approved',
+                    manualCreation: true,
+                    submittedAt: new Date().toLocaleString(),
+                    submittedTimestamp: Date.now(),
+                    approvedBy: 'Administrator (Manual)',
+                    approvedAt: new Date().toLocaleString(),
+                    approvedTimestamp: Date.now(),
+                    role: role
+                };
+                
+                try {
+                    // Save to Firebase registrations
+                    await registrationsRef.push(manualRegistration);
+                    
+                    // Also create user account
+                    const userData = {
+                        controlNumber: controlNumber,
+                        email: email,
+                        password: password, // Note: In production, hash passwords!
+                        personalInfo: manualRegistration.personalInfo,
+                        householdInfo: manualRegistration.householdInfo,
+                        role: role,
+                        status: 'active',
+                        approvedBy: 'Administrator (Manual)',
+                        approvedAt: new Date().toLocaleString(),
+                        createdAt: new Date().toISOString(),
+                        lastLogin: null,
+                        manualCreation: true
+                    };
+                    
+                    await usersRef.push(userData);
+                    
+                    // Reset form
+                    document.getElementById('manual-account-form').reset();
+                    
+                    this.showToast(`Manual account created successfully! Control Number: ${controlNumber}`, 'success');
+                    this.logActivity(`Created manual account: ${controlNumber} (${firstName} ${lastName}) as ${role}`, 'success');
+                    
+                } catch (error) {
+                    console.error('Error creating manual account:', error);
+                    this.showToast('Error creating manual account. Please try again.', 'error');
+                }
+            }
+
+            exportData() {
+                const data = {
+                    exportDate: new Date().toISOString(),
+                    totalRegistrations: this.allRegistrations.length,
+                    pending: this.allRegistrations.filter(r => r.status === 'pending').length,
+                    approved: this.allRegistrations.filter(r => r.status === 'approved').length,
+                    rejected: this.allRegistrations.filter(r => r.status === 'rejected').length,
+                    registrations: this.allRegistrations
+                };
+                
+                const dataStr = JSON.stringify(data, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `barangay-registrations-export-${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+                
+                this.showToast('Data exported successfully!', 'success');
+                this.logActivity('Exported all registration data', 'info');
+            }
+
+            exportAllRegistrations() {
+                this.exportData();
+            }
+
+            updateRecentActivity() {
+                const container = document.getElementById('recent-activity');
+                if (!container) return;
+                
+                if (this.activityLog.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: var(--gray);">
+                            <i class="fas fa-clock"></i> No recent activity...
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = this.activityLog.slice(0, 5).map(log => `
+                    <div style="padding: 10px 15px; border-left: 3px solid ${
+                        log.type === 'success' ? '#28a745' : 
+                        log.type === 'warning' ? '#ffc107' : 
+                        '#dc3545'
+                    }; margin-bottom: 10px; background: #f8f9fa; border-radius: 0 5px 5px 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+                            <span style="font-weight: 600;">${log.message}</span>
+                            <small style="color: #6c757d;">${log.timestamp}</small>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            updateSaveStatus(message, type = 'default') {
+                const statusElement = document.getElementById('save-status');
+                if (!statusElement) return;
+                
+                statusElement.textContent = message;
+                statusElement.className = 'save-status';
+                
+                if (type === 'success') {
+                    statusElement.classList.add('success');
+                } else if (type === 'warning') {
+                    statusElement.classList.add('warning');
+                } else if (type === 'error') {
+                    statusElement.classList.add('error');
+                } else if (type === 'info') {
+                    statusElement.classList.add('info');
+                }
+                
+                if (type === 'success' || type === 'info' || type === 'warning') {
+                    setTimeout(() => {
+                        statusElement.textContent = '• Connected to Firebase';
+                        statusElement.className = 'save-status success';
+                    }, 3000);
+                }
+            }
+
+            showToast(message, type = 'info') {
+                const toast = document.getElementById('toast');
+                if (!toast) return;
+                
+                toast.textContent = message;
+                toast.className = `toast ${type}`;
+                
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+
+            logActivity(message, type) {
+                const activity = {
+                    timestamp: new Date().toLocaleTimeString(),
+                    message: message,
+                    type: type
+                };
+                this.activityLog.unshift(activity);
+                
+                if (this.activityLog.length > 10) {
+                    this.activityLog.pop();
+                }
+                
+                this.updateRecentActivity();
+            }
+        }
+
+        // Initialize the admin panel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.registrationAdminPanel = new RegistrationAdminPanel();
+        });
+    </script>
+</body>
+</html>
